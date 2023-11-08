@@ -69,7 +69,7 @@ public class GameRoundSvc {
                     //At this point the player has chosen STAND
                     while (dealer.sumAtHand(dealer.getHandOfCards()) < 21 || dealer.sumAtHand(dealer.getHandOfCards()) <= user.sumAtHand(user.getHandOfCards())) {
                         dealer.setCardInHand(CardUtils.drawCardAndUpdateDeck(deck));
-                        dealer.showHand();
+                        dealer.showAll();
                     }
 
                     if (dealer.sumAtHand(dealer.getHandOfCards()) > 21) {

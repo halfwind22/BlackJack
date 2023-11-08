@@ -10,6 +10,7 @@
 
 ### TODO
 
+* Add rule based intelligence to take more appropriate decisions while ensuring randomness at the same time
 * Start with a chest and then add bets
 * Double bet -> double the bet amount and are given one more card
 * Split if same value for user on both cards
