@@ -5,16 +5,19 @@ import org.example.enums.Card;
 import org.example.enums.Suite;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class CardUtils {
 
     public static org.example.entity.Card cardGenerator(Suite suite, Card card) {
-        return new org.example.entity.Card(suite, card.name(), card.ordinal() + 1);
+        return new org.example.entity.Card(suite, card, card.ordinal() + 1);
     }
 
-    public static Deck deckGenerator(Map<Suite, ArrayList<org.example.entity.Card>> mapDeck) {
+    public static Deck deckGenerator(Deck mapDeck) {
 
+        mapDeck.getDeckOfCards().clear();
         Suite[] suites = Suite.values();
         for (Suite suite : suites) {
 
@@ -23,8 +26,18 @@ public class CardUtils {
             for (Card card : cards) {
                 listOfCards.add(CardUtils.cardGenerator(suite, card));
             }
-            mapDeck.put(suite, listOfCards);
+            mapDeck.getDeckOfCards().put(suite, listOfCards);
         }
-        return new Deck(mapDeck);
+        return mapDeck;
     }
+
+    public static org.example.entity.Card drawCardAndUpdateDeck(Deck deck) {
+        Suite randomSuite = Suite.values()[new Random().nextInt(Suite.values().length)];
+        ArrayList<org.example.entity.Card> cardsFromRandomSuite = deck.getDeckOfCards().get(randomSuite);
+        int indexOfCardToBePopped = new Random().nextInt(cardsFromRandomSuite.size());
+        org.example.entity.Card card = cardsFromRandomSuite.get(indexOfCardToBePopped);
+        cardsFromRandomSuite.remove(card);
+        return card;
+    }
+
 }
